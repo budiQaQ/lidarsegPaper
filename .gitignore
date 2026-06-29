@@ -1,0 +1,17 @@
+.DS_Store
+
+# Downloaded papers and source code are kept locally only.
+**/paper.pdf
+**/code/
+**/code_nonofficial/
+**/code.zip
+
+# Large external artifacts should not be committed.
+**/checkpoints/
+**/weights/
+**/pretrained/
+**/*.pth
+**/*.pt
+**/*.ckpt
+**/*.tar.gz
+**/*.zip

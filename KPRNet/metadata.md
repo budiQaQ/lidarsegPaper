@@ -1,0 +1,21 @@
+# KPRNet 元信息
+
+- 论文标题: KPRNet: Improving projection-based LiDAR semantic segmentation
+- 作者: Deyvid Kochanov, Fatemeh Karimi Nejadasl, Olaf Booij
+- 单位: TomTom
+- 年份: 2020
+- arXiv: https://arxiv.org/abs/2007.12668
+- 本地论文: `paper.pdf`
+- 代码:
+  - 官方代码: https://github.com/DeyvidKochanov-TomTom/kprnet
+  - 本地官方浅克隆: `code/`
+  - 官方代码 commit: `2e71e0f55c000abdb0768dc662920cd622a1f487`
+  - 本地另存非官方复现: `code_nonofficial/`
+  - 非官方复现地址: https://github.com/ayush-13/KPRNET_Reproduction
+  - 非官方复现 commit: `89ab9f9bb302f05635286b82a0d2ade7dc219bf7`
+- 任务: LiDAR semantic segmentation
+- 主要数据集: SemanticKITTI
+- 表示形式: spherical / range image + point-wise refinement
+- 核心模块: stronger 2D projection CNN, DeepLab/ASPP-style head, KPConv point-wise refinement
+- 代表结果: SemanticKITTI test 63.1 mIoU
+- 复现备注: 官方 README 写明论文结果使用 8 张 16GB GPU 训练，总 batch size 24，并依赖 Cityscapes 预训练权重；本次未下载 Google Drive 权重。
