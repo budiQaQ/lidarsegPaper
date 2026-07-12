@@ -1,0 +1,22 @@
+# RangeRet 元信息
+
+- 论文标题: Revisiting Retentive Networks for Fast Range-View 3D LiDAR Semantic Segmentation
+- 方法名: RangeRet
+- 作者: Simone Mosco, Daniel Fusaro, Wanmeng Li, Alberto Pretto
+- 单位: University of Padova
+- 会议/年份: WACV 2026
+- 论文: https://openaccess.thecvf.com/content/WACV2026/papers/Mosco_Revisiting_Retentive_Networks_for_Fast_Range-View_3D_LiDAR_Semantic_Segmentation_WACV_2026_paper.pdf
+- 本地论文: `paper.pdf`
+- 代码: https://github.com/SiMoM0/RangeRet
+- 本地代码: `code/`
+- 本地 commit: `c198144169c6fc8ddfc990f78639c3f162bfa82f`
+- 任务: LiDAR semantic segmentation
+- 主要数据集: SemanticKITTI, PandaSet, SemanticPOSS
+- 表示形式: range-view / range image
+- 核心模块: Retentive Network, Circular Retention (CiR), Range Embedding / ConvStem, range-view augmentation, kNN post-processing
+- 代表结果:
+  - SemanticKITTI test: 64.5 mIoU
+  - PandaSet test: 60.0 mIoU
+  - SemanticPOSS test: 52.8 mIoU
+  - 参数量约 3.8M，PandaSet validation runtime 38 ms
+- 复现备注: README 提供 Hugging Face 权重入口；本次未下载权重、数据集或任何付费资源。

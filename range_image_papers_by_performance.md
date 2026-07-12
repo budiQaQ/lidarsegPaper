@@ -11,6 +11,8 @@
 | 性能层级 | 论文 | 已整理 | 主要指标/表现 | 方法定位 |
 | --- | --- | --- | --- | --- |
 | 高 | CENet | 是 | SemanticKITTI test 约 64.7 mIoU | FIDNet 思路上的增强版，3x3 conv + activation + auxiliary heads |
+| 高 | RangeRet | 是 | SemanticKITTI test 64.5 mIoU；PandaSet test 60.0；SemanticPOSS test 52.8 | Retentive Network + Circular Retention，轻量 range-view 长程建模 |
+| 高 | RangeViT | 是 | SemanticKITTI test 64.0 mIoU；nuScenes val 75.2 mIoU | range image + image-pretrained ViT + 3D refiner |
 | 高 | Lite-HDSeg | 是 | SemanticKITTI test 63.8 mIoU，约 20 FPS | lite harmonic dense convolution + ICM + MCSPN，高精度实时 encoder-decoder |
 | 高 | KPRNet | 是 | SemanticKITTI test 63.1 mIoU | 2D projection CNN + KPConv learnable point-wise refinement |
 | 中高 | SalsaNext | 是 | SemanticKITTI test 约 59.5 mIoU | 完整 range-image encoder-decoder，dilated context + pixel shuffle + uncertainty |
@@ -19,6 +21,13 @@
 | 中 | 3D-MiniNet | 是 | 3D-MiniNet-KNN 55.8 mIoU；small 版 51.8 mIoU/61 FPS | learned 2D representation + 轻量 2D FCNN |
 | 中 | RangeNet++ | 是 | RangeNet53++ 52.2 mIoU，约 12 scans/sec | 经典 spherical projection + Darknet + kNN baseline |
 | 早期不可横比 | LU-Net | 是 | KITTI 三类 average IoU 55.4，24 FPS | learned 3D local feature + U-Net，非 SemanticKITTI 20 类 |
+
+## Range-View Transformer 强基线
+
+| 论文 | 已整理 | 主要指标/表现 | 方法定位 |
+| --- | --- | --- | --- |
+| RangeFormer | 是 | SemanticKITTI test 73.3 mIoU；STR 低分辨率训练 72.2 mIoU | 当前最重要的 LiDAR-only range-view Transformer/full-cycle framework 参考 |
+| RangeRet | 是 | SemanticKITTI test 64.5 mIoU；约 3.8M 参数；PandaSet validation 38 ms | 比 RangeFormer 更轻，适合部署友好的 range-view Transformer/RetNet student |
 
 ## 仍建议后续补齐的谱系论文
 
@@ -34,6 +43,7 @@
 | 论文 | 已整理 | 主要指标/表现 | 为什么单独列出 |
 | --- | --- | --- | --- |
 | 2DPASS | 是 | SemanticKITTI single-scan test 72.9 mIoU；训练期用图像，推理期只用 LiDAR | 它不是 range-image 方法，而是 sparse point-voxel 3D backbone + 2D priors KD；性能显著高于已整理 range-image 组，适合作精度上限参照 |
+| Point Transformer V3 | 是 | nuScenes val 80.3 mIoU；Waymo semantic 71.2；论文图中 SemanticKITTI 63.5 | 不是 range-image，适合作 3D Transformer teacher/upper-bound 对照 |
 
 ## 性能排序带来的工程判断
 
