@@ -70,3 +70,24 @@ SalsaNext 是面向自动驾驶 LiDAR 语义分割的 range-image encoder-decode
 - uncertainty 是否只是可视化输出，还是能用于拒识/规划。
 - 与 FIDNet/CENet 的差异：复杂 decoder vs parameter-free FID。
 - 与 PointNet/PointNet++ 的差异：projection 高吞吐 vs raw point 几何保真。
+
+## 论文与代码地址
+
+- 论文地址: https://arxiv.org/abs/2003.03653
+- GitHub 仓库: https://github.com/TiagoCortinhal/SalsaNext
+
+## 核心创新代码块
+
+```python
+# SalsaNext 核心伪代码
+x = context_module(range_image)
+x = residual_dilated_encoder(x)
+x = pixel_shuffle_decoder(x)
+logits, uncertainty = segmentation_head(x), bayesian_dropout(x)
+loss = weighted_ce + lovasz
+```
+
+## 使用方法描述
+
+使用时可选择普通或 uncertainty 版本；若研究可靠性/置信度，保留 central dropout 和 Bayesian uncertainty 输出。
+

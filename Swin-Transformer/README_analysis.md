@@ -62,3 +62,23 @@ Swin Transformer 是通用视觉 backbone，通过 shifted window attention 让 
 - 与 RangeViT: RangeViT 是 ViT 直接适配 range image；Swin 更适合作局部窗口 attention 设计灵感。
 - 与 RangeFormer: RangeFormer 是 LiDAR range-view 完整方案；Swin 只是可借鉴模块。
 - 与 2DPASS: Swin 可作为 2D camera branch teacher，不是 LiDAR student。
+
+## 论文与代码地址
+
+- 论文地址: https://arxiv.org/abs/2103.14030
+- GitHub 仓库: https://github.com/microsoft/Swin-Transformer
+
+## 核心创新代码块
+
+```python
+# Swin shifted-window 思想伪代码
+x = window_attention(x, window_size=(h, w))
+x = cyclic_shift(x, shift_size=(h//2, w//2))
+x = window_attention(x, window_size=(h, w))
+x = patch_merging(x)
+```
+
+## 使用方法描述
+
+使用时可作为 camera teacher backbone，或把 shifted-window attention 改成适配 `64 x 2048` range image 的非方形窗口模块。
+

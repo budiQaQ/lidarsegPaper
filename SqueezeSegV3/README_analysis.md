@@ -62,3 +62,23 @@ SqueezeSegV3 针对 LiDAR range image 的空间分布非平稳问题提出 Spati
 - 与 CENet: 空间自适应卷积 vs 普通 3x3 conv + activation/auxiliary loss。
 - 与 Lite-HDSeg: SAC 算子改造 vs harmonic dense + ICM + MCSPN 系统改造。
 - 与 KPRNet: 2D 自适应卷积 vs 3D 点级可学习 refinement。
+
+## 论文与代码地址
+
+- 论文地址: https://arxiv.org/abs/2004.01803
+- GitHub 仓库: https://github.com/chenfengxu714/SqueezeSegV3
+
+## 核心创新代码块
+
+```python
+# SqueezeSegV3/code/src/backbones/SAC.py
+class SACBlock(nn.Module):
+    # generate spatially-adaptive attention over convolution weights
+    # use SAC to replace standard conv blocks in RangeNet-style backbone
+    pass
+```
+
+## 使用方法描述
+
+使用时用 `src/backbones/SAC.py` 替换标准 Darknet/RangeNet block，并在推理时按配置决定是否启用 kNN post-processing。
+

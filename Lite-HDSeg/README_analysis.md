@@ -62,3 +62,24 @@ Lite-HDSeg 是一套高精度实时 range-image LiDAR 分割网络，用轻量 h
 - 与 SalsaNext: 都是较完整 encoder-decoder，Lite-HDSeg 更强调 harmonic dense 和边界传播。
 - 与 KPRNet: 2D 边界/上下文 refinement vs 3D KPConv point-wise refinement。
 - 与 RangeNet++: 更强网络和 loss 设计，但后处理仍继承 kNN。
+
+## 论文与代码地址
+
+- 论文地址: https://arxiv.org/abs/2103.08852
+- GitHub 仓库: 未发现可信官方公开代码
+
+## 核心创新代码块
+
+```python
+# 论文级复现伪代码
+x = lite_harmonic_dense_encoder(range_image)
+x = improved_context_module(x)
+logits = residual_decoder(x)
+logits = multi_class_spatial_propagation_network(logits)
+loss = weighted_ce + lovasz + boundary_loss + regularization
+```
+
+## 使用方法描述
+
+该论文未找到可信官方代码；如果复现，应先实现 Lite Harmonic Dense Convolution、ICM、MCSPN，再用 SemanticKITTI 验证边界 loss 和 kNN 后处理贡献。
+

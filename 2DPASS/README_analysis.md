@@ -74,3 +74,26 @@
 - 与 KPRNet: KPRNet 用 3D KPConv 在推理期做点级 refinement；2DPASS 用 2D 图像在训练期做知识迁移，推理期没有图像/KD 分支。
 - 与 3D-MiniNet/LU-Net: 都试图弥补纯 2D/range 投影的信息损失；2DPASS 更偏 3D backbone 与跨模态训练，不是 learned range representation。
 - 与 PointNet/PointNet++: 2DPASS 面向完整自动驾驶 LiDAR 大场景，主干使用 sparse point-voxel 结构，远强于早期 raw point set baseline。
+
+## 论文与代码地址
+
+- 论文地址: https://arxiv.org/abs/2207.04397
+- GitHub 仓库: https://github.com/yanx27/2DPASS
+
+## 核心创新代码块
+
+```python
+# 2DPASS/code/network/arch_2dpass.py
+class get_model(LightningBaseModel):
+    def forward(self, data_dict):
+        data_dict = self.model_3d(data_dict)
+        if self.training and not self.baseline_only:
+            data_dict = self.model_2d(data_dict)
+            data_dict = self.fusion(data_dict)
+        return data_dict
+```
+
+## 使用方法描述
+
+训练时不要用 `--baseline_only`，让 2D image branch 和 `xModalKD` 参与训练；推理/测试时只走 `model_3d`，因此部署仍是 LiDAR-only。
+

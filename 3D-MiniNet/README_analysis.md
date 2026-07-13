@@ -64,3 +64,21 @@
 - 与 RangeNet++: learned projection + MiniNet FCNN vs fixed projection + Darknet。
 - 与 FIDNet/CENet: 输入表示增强 vs decoder/backbone/loss 增强。
 - 与 KPRNet: 前端 learned 2D representation vs 后端 KPConv point-wise refinement。
+
+## 论文与代码地址
+
+- 论文地址: https://arxiv.org/abs/2002.10893
+- GitHub 仓库: https://github.com/Shathe/3D-MiniNet
+
+## 核心创新代码块
+
+```python
+# 3D-MiniNet/code/pytorch_code/lidar-bonnetal/train/tasks/semantic/modules/trainer.py
+outputs = model([in_vol, proj_chan_group_points], proj_mask)
+loss = criterion(torch.log(outputs.clamp(min=1e-8)), proj_labels)
+```
+
+## 使用方法描述
+
+使用时同时输入 range image 特征 `in_vol` 和分组后的点级局部特征 `proj_chan_group_points`，先学习 2D 表示，再由轻量 2D FCNN 输出语义。
+

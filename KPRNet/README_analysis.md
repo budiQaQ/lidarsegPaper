@@ -62,3 +62,24 @@ Range-image 方法速度快、工程友好，但投影到 2D 后会丢失 3D 邻
 - 与 FIDNet: 可学习点级恢复 vs parameter-free interpolation + NLA。
 - 与 CENet: 更强 3D refinement vs 更轻量 2D 表达增强。
 - 与 Lite-HDSeg: 点级 refinement vs 2D encoder-decoder + MCSPN/kNN。
+
+## 论文与代码地址
+
+- 论文地址: https://arxiv.org/abs/2007.12668
+- GitHub 仓库: https://github.com/DeyvidKochanov-TomTom/kprnet
+
+## 核心创新代码块
+
+```python
+# KPRNet/code/models/deeplab.py
+class KPClassifier(nn.Module):
+    def forward(self, x, px, py, pxyz, pknn):
+        x = resample_grid(x, py, px)
+        feats = self.kpconv(points, points, pknn[i, ...], feats)
+        return self.relu(self.bn(res))
+```
+
+## 使用方法描述
+
+使用时先用 2D DeepLab/ASPP 提取 range-view 特征，再按点投影坐标采样回 3D 点，并用 KPConv 做点级 refinement；这一步会提升边界/小目标，但明显增加推理成本。
+

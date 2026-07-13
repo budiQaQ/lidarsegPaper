@@ -74,3 +74,24 @@ FIDNet 将点云投影到 `64 x 2048` spherical range image。网络只处理每
 - 对边界和小目标的提升来自网络预测本身，还是来自投影回填策略。
 - 是否保持 FID 的 parameter-free decoder 优势。
 - 是否在相同 `64 x 2048` 输入分辨率下比较。
+
+## 论文与代码地址
+
+- 论文地址: https://arxiv.org/abs/2109.03787
+- GitHub 仓库: https://github.com/placeforyiming/IROS21-FIDNet-SemanticKITTI
+
+## 核心创新代码块
+
+```python
+# FID 思想伪代码：decoder 不引入可学习反卷积
+x = backbone(range_image)
+for feat in multi_scale_features:
+    feat = interpolate(feat, size=input_resolution, mode="bilinear")
+logits = classifier(concat(all_resized_features))
+labels = nearest_label_assignment(logits, projected_points)
+```
+
+## 使用方法描述
+
+使用时保持 fully interpolation decoding 的 parameter-free 设计；对比 CENet 时重点观察是否加入 3x3 conv、auxiliary loss 和 boundary loss。
+
