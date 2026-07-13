@@ -11,6 +11,7 @@
 - 主要数据集: SemanticKITTI, nuScenes, ScribbleKITTI
 - 表示形式: range view / range image
 - 核心模块: RangeFormer, RangeAug, RangePost, Scalable Training from Range view (STR)
+- 参数量与计算耗时: 后续对比表口径约 23.7M/54 ms。
 - 代表结果:
   - SemanticKITTI semantic segmentation test: 73.3 mIoU
   - SemanticKITTI panoptic segmentation: P-RangeFormer 64.2 PQ / 72.0 mIoU

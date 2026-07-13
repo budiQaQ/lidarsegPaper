@@ -17,5 +17,6 @@
 - 主要数据集: SemanticKITTI
 - 表示形式: spherical / range image + point-wise refinement
 - 核心模块: stronger 2D projection CNN, DeepLab/ASPP-style head, KPConv point-wise refinement
+- 参数量与计算耗时: 外部对比表口径约 0.3 FPS；参数量需按 KPConv/backbone 配置统计。
 - 代表结果: SemanticKITTI test 63.1 mIoU
 - 复现备注: 官方 README 写明论文结果使用 8 张 16GB GPU 训练，总 batch size 24，并依赖 Cityscapes 预训练权重；本次未下载 Google Drive 权重。

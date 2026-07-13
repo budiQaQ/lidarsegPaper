@@ -12,4 +12,5 @@
 - 方法类型: range-image / spherical projection based 2D CNN
 - 主要数据集: SemanticKITTI, SemanticPOSS
 - 核心模块: 3x3 convolution input/classification head, ResNet-style backbone, FID-like multi-scale interpolation fusion, Hardswish/SiLU activation, auxiliary segmentation heads, weighted CE + Lovasz-Softmax + boundary loss
+- 参数量与计算耗时: RTX 3080 速度日志：64x2048 约 37.79 FPS，64x1024 约 67.97 FPS，64x512 约 84.91 FPS；参数量需运行代码统计。
 - 复现备注: README 提供训练、推理、评测命令和 Google Drive 预训练权重；未下载数据集和权重。作者 README 说明部分模型和 config 可能因多次更新存在不一致，需要按具体报错调整。

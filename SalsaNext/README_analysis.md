@@ -71,6 +71,11 @@ SalsaNext 是面向自动驾驶 LiDAR 语义分割的 range-image encoder-decode
 - 与 FIDNet/CENet 的差异：复杂 decoder vs parameter-free FID。
 - 与 PointNet/PointNet++ 的差异：projection 高吞吐 vs raw point 几何保真。
 
+## 参数量与计算耗时
+
+- 参数量: 后续 RangeRet 对比表给出 SalsaNext 约 6.7M 参数；SalsaNext 官方 README 本身未在首页表格中列参数。
+- 计算耗时: RangeRet 对比表给出 PandaSet validation 口径约 19 ms；SalsaNext 论文定位为 real-time，但与 SemanticKITTI test mIoU 表的硬件/是否含后处理口径需分开记录。
+
 ## 论文与代码地址
 
 - 论文地址: https://arxiv.org/abs/2003.03653

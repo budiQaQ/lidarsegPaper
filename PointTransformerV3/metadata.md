@@ -12,5 +12,6 @@
 - 主要数据集: ScanNet, ScanNet200, S3DIS, nuScenes, Waymo, SemanticKITTI
 - 表示形式: serialized point cloud Transformer
 - 核心模块: point cloud serialization, wider receptive field, FlashAttention, simplified point Transformer
+- 参数量与计算耗时: 论文整理中记录 PTv3 latency 约 44 ms、显存约 1.2G；参数量需按 Pointcept 配置统计。
 - 代表结果: nuScenes validation 80.3 mIoU；Waymo semantic segmentation 71.2 mIoU；论文图中 SemanticKITTI semantic segmentation 63.5
 - 复现备注: README 指向 Pointcept v1.5 作为主框架；本地 repo 可单独复制 `model.py` 和 `serialization/`。

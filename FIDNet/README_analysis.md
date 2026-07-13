@@ -75,6 +75,11 @@ FIDNet 将点云投影到 `64 x 2048` spherical range image。网络只处理每
 - 是否保持 FID 的 parameter-free decoder 优势。
 - 是否在相同 `64 x 2048` 输入分辨率下比较。
 
+## 参数量与计算耗时
+
+- 参数量: 论文补充/整理中记录新结构约 6M 参数。
+- 计算耗时: validation ablation 中 CNN-only 约 11 ms；KNN 后处理约 2.7 ms，NLA 后处理约 1.2 ms；补充说明半精度下单帧约 0.01 s。
+
 ## 论文与代码地址
 
 - 论文地址: https://arxiv.org/abs/2109.03787

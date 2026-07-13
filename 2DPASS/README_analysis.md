@@ -75,6 +75,11 @@
 - 与 3D-MiniNet/LU-Net: 都试图弥补纯 2D/range 投影的信息损失；2DPASS 更偏 3D backbone 与跨模态训练，不是 learned range representation。
 - 与 PointNet/PointNet++: 2DPASS 面向完整自动驾驶 LiDAR 大场景，主干使用 sparse point-voxel 结构，远强于早期 raw point set baseline。
 
+## 参数量与计算耗时
+
+- 参数量: README model zoo 中 SemanticKITTI `2DPASS 4scale-64dimension` 约 1.9M，`6scale-256dimension` 约 45.6M；MinkowskiNet/SPVCNN baseline 约 21.7M/21.8M。
+- 计算耗时: 论文表中 SemanticKITTI single-scan 约 62 ms；推理期只保留 3D LiDAR student，2D image branch 是训练期蒸馏组件。
+
 ## 论文与代码地址
 
 - 论文地址: https://arxiv.org/abs/2207.04397

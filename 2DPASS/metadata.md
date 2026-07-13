@@ -13,6 +13,7 @@
 - 主要数据集: SemanticKITTI, NuScenes
 - 表示形式: 3D sparse point/voxel backbone + training-only 2D image branch
 - 核心模块: auxiliary 2D branch, multi-scale fusion-to-single knowledge distillation, SPVCNN-style 3D baseline
+- 参数量与计算耗时: SemanticKITTI model zoo：1.9M 小模型、45.6M 大模型；论文表中 single-scan 约 62 ms。
 - 代表结果:
   - SemanticKITTI single-scan test: 72.9 mIoU，论文表中速度约 62 ms
   - SemanticKITTI multiple-scan test: 62.4 mIoU

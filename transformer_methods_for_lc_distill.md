@@ -2,14 +2,14 @@
 
 ## 分层结论
 
-| 层级 | 方法 | 与当前方向的关系 | 最值得借鉴的点 |
-| --- | --- | --- | --- |
-| 直接相关 | RangeFormer | LiDAR-only range-view 强基线 | many-to-one / semantic incoherence / shape deformation 问题定义，RangePost，STR |
-| 直接相关 | RangeViT | range image + ViT | image-pretrained ViT 迁移、非方形 patch token、range-view token KD |
-| 直接相关 | RangeRet | range image + Retentive Network | Circular Retention、轻量长程建模、水平 360 度环绕连续性 |
-| 模块参考 | Swin Transformer | 通用 2D backbone | shifted window attention、多尺度 feature、camera teacher |
-| 3D 对照 | Point Transformer V3 | 现代 3D point Transformer | serialized point tokens、FlashAttention、3D teacher 或 sparse student 对照 |
-| 3D 对照 | Stratified Transformer | point-based long-range context | local dense + distant sparse attention，可迁移为 range-view 稀疏全局注意力 |
+| 层级 | 方法 | 与当前方向的关系 | 参数量 | 计算耗时/速度 | 最值得借鉴的点 |
+| --- | --- | --- | --- | --- | --- |
+| 直接相关 | RangeFormer | LiDAR-only range-view 强基线 | 约 23.7M | PandaSet validation 约 54 ms | many-to-one / semantic incoherence / shape deformation 问题定义，RangePost，STR |
+| 直接相关 | RangeViT | range image + ViT | 未确认，取决于 ViT backbone | 未找到可横比 latency | image-pretrained ViT 迁移、非方形 patch token、range-view token KD |
+| 直接相关 | RangeRet | range image + Retentive Network | 约 3.8M | PandaSet validation 约 38 ms | Circular Retention、轻量长程建模、水平 360 度环绕连续性 |
+| 模块参考 | Swin Transformer | 通用 2D backbone | Swin-T/S/B 约 28M/50M/88M；UPerNet 约 60M/81M/121M | ImageNet 分类约 755/437/278 FPS；分割 teacher 需重测 | shifted window attention、多尺度 feature、camera teacher |
+| 3D 对照 | Point Transformer V3 | 现代 3D point Transformer | 未确认，随 Pointcept 配置变化 | 整理中记录约 44 ms | serialized point tokens、FlashAttention、3D teacher 或 sparse student 对照 |
+| 3D 对照 | Stratified Transformer | point-based long-range context | 未确认 | 未找到可横比 LiDAR scan latency | local dense + distant sparse attention，可迁移为 range-view 稀疏全局注意力 |
 
 ## 对 LC 蒸馏最有价值的设计
 

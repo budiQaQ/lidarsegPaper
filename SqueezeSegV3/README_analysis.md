@@ -63,6 +63,11 @@ SqueezeSegV3 针对 LiDAR range image 的空间分布非平稳问题提出 Spati
 - 与 Lite-HDSeg: SAC 算子改造 vs harmonic dense + ICM + MCSPN 系统改造。
 - 与 KPRNet: 2D 自适应卷积 vs 3D 点级可学习 refinement。
 
+## 参数量与计算耗时
+
+- 参数量: README 未列出确定参数量；SAC 版本、ResNet-21/53 backbone 和 kNN 选项会改变实际规模。
+- 计算耗时: SqueezeSegV3-53+kNN 论文表中约 6 scans/sec，约 167 ms/scan；SAC 会增加 MAC/显存，轻量版本速度会不同。
+
 ## 论文与代码地址
 
 - 论文地址: https://arxiv.org/abs/2004.01803

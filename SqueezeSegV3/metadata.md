@@ -12,5 +12,6 @@
 - 主要数据集: SemanticKITTI
 - 表示形式: spherical range image
 - 核心模块: Spatially-Adaptive Convolution, RangeNet++ framework, multi-layer cross entropy, optional kNN post-processing
+- 参数量与计算耗时: SqueezeSegV3-53+kNN 约 6 scans/sec；参数量需按 SAC/backbone 版本重新统计。
 - 代表结果: SqueezeSegV3-53+kNN SemanticKITTI test 55.9 mIoU
 - 复现备注: 代码基于 PyTorch 1.1.0 / Python 3.6；README 提供预训练模型入口，但本次未下载权重。

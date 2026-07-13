@@ -63,6 +63,11 @@ Range-image 方法速度快、工程友好，但投影到 2D 后会丢失 3D 邻
 - 与 CENet: 更强 3D refinement vs 更轻量 2D 表达增强。
 - 与 Lite-HDSeg: 点级 refinement vs 2D encoder-decoder + MCSPN/kNN。
 
+## 参数量与计算耗时
+
+- 参数量: 官方 README 未列出完整参数量；2D CNN + KPConv refinement 的规模受 kernel point、邻域和 backbone 设置影响。
+- 计算耗时: Lite-HDSeg 对比表中 KPRNet 约 0.3 FPS，约 3333 ms/scan；这是点级 KPConv refinement 带来的主要工程代价，口径与纯 range-image forward 不可直接等价。
+
 ## 论文与代码地址
 
 - 论文地址: https://arxiv.org/abs/2007.12668

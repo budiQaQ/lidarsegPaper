@@ -11,5 +11,6 @@
 - 主要数据集: SemanticKITTI
 - 表示形式: spherical range image
 - 核心模块: Lite Harmonic Dense Convolution, encoder-decoder, ICM, MCSPN, boundary loss, kNN post-processing
+- 参数量与计算耗时: 论文报告约 20 FPS；参数量未在本地材料中确认。
 - 代表结果: SemanticKITTI test 63.8 mIoU, 约 20 FPS
 - 复现备注: 由于未找到官方代码，工程复现需要按论文重实现，风险高于 RangeNet++/SqueezeSegV3/CENet/FIDNet。

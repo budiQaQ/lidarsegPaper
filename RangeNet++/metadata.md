@@ -12,5 +12,6 @@
 - 主要数据集: SemanticKITTI
 - 表示形式: spherical range image
 - 核心模块: Darknet-style backbone, spherical projection, range-aware kNN post-processing
+- 参数量与计算耗时: RangeNet53++ 约 12 scans/sec；参数量在本地材料中未确认，需按 backbone 配置统计。
 - 代表结果: RangeNet53++ 64 x 2048 SemanticKITTI test 52.2 mIoU, 约 12 scans/sec
 - 复现备注: 仓库已 archive；clone 到 macOS 大小写不敏感文件系统时出现 README/readme 名称冲突警告，但核心代码已下载。

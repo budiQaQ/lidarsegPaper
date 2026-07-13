@@ -63,6 +63,11 @@ Lite-HDSeg 是一套高精度实时 range-image LiDAR 分割网络，用轻量 h
 - 与 KPRNet: 2D 边界/上下文 refinement vs 3D KPConv point-wise refinement。
 - 与 RangeNet++: 更强网络和 loss 设计，但后处理仍继承 kNN。
 
+## 参数量与计算耗时
+
+- 参数量: 论文/本地材料未确认可直接引用的参数量；由于未找到可信官方代码，暂不手工估算。
+- 计算耗时: 论文报告约 20 FPS，约 50 ms/scan，强调 accuracy-runtime trade-off。
+
 ## 论文与代码地址
 
 - 论文地址: https://arxiv.org/abs/2103.08852

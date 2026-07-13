@@ -12,4 +12,5 @@
 - 方法类型: raw point-based neural network
 - 主要数据集: ModelNet40, ShapeNetPart, S3DIS
 - 核心模块: shared MLP, symmetric max pooling, input transform T-Net, feature transform T-Net, global feature + point feature fusion
+- 参数量与计算耗时: PointNet 原始任务不是 SemanticKITTI LiDAR scan segmentation，参数量和耗时需按具体分类/分割配置本地统计。
 - 复现备注: 官方代码基于 Python 2.7、TensorFlow 1.0.1、CUDA 8.0；未下载 ModelNet40、ShapeNetPart 或 S3DIS 数据。

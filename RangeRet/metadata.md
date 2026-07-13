@@ -14,6 +14,7 @@
 - 主要数据集: SemanticKITTI, PandaSet, SemanticPOSS
 - 表示形式: range-view / range image
 - 核心模块: Retentive Network, Circular Retention (CiR), Range Embedding / ConvStem, range-view augmentation, kNN post-processing
+- 参数量与计算耗时: 论文对比表约 3.8M/38 ms。
 - 代表结果:
   - SemanticKITTI test: 64.5 mIoU
   - PandaSet test: 60.0 mIoU

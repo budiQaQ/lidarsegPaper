@@ -10,5 +10,6 @@
 - 本地 commit: `f82860bfb5225915aca09c3227159ee9e1df874d`
 - 任务: 通用视觉 backbone；分类、检测、实例分割、语义分割
 - 核心模块: shifted window self-attention, hierarchical patch merging, relative position bias
+- 参数量与计算耗时: Swin-T/S/B backbone 约 28M/50M/88M；UPerNet segmentation 约 60M/81M/121M；分类 FPS 不能直接代表 LiDAR/camera segmentation latency。
 - 代表结果: ADE20K semantic segmentation 53.5 mIoU；COCO test-dev 58.7 box AP / 51.1 mask AP
 - 复现备注: 这不是 LiDAR segmentation 论文；本次作为 range-view LC 蒸馏中的 2D teacher / window attention 设计参考。

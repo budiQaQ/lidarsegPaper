@@ -63,6 +63,11 @@ Swin Transformer 是通用视觉 backbone，通过 shifted window attention 让 
 - 与 RangeFormer: RangeFormer 是 LiDAR range-view 完整方案；Swin 只是可借鉴模块。
 - 与 2DPASS: Swin 可作为 2D camera branch teacher，不是 LiDAR student。
 
+## 参数量与计算耗时
+
+- 参数量: 官方 README ImageNet 表中 Swin-T/S/B 分别约 28M/50M/88M；UPerNet 语义分割表中 Swin-T/S/B 分别约 60M/81M/121M。
+- 计算耗时: ImageNet 224x224 分类吞吐 Swin-T 约 755 FPS、Swin-S 约 437 FPS、Swin-B 约 278 FPS；UPerNet 分割表给 FLOPs 但未给 FPS，迁移到 range-view/camera teacher 时需重新测 latency。
+
 ## 论文与代码地址
 
 - 论文地址: https://arxiv.org/abs/2103.14030

@@ -12,6 +12,7 @@
 - 主要数据集: nuScenes, SemanticKITTI
 - 表示形式: range image + ViT encoder + convolutional stem/decoder + 3D refiner
 - 核心模块: image-pretrained ViT transfer, small rectangular patch tokenization, UpConv decoder, 3D refiner
+- 参数量与计算耗时: 参数量和耗时需按具体 ViT backbone、patch size、decoder/refiner 配置本地统计。
 - 代表结果:
   - SemanticKITTI test: 64.0 mIoU
   - nuScenes validation: 75.2 mIoU with Cityscapes-pretrained ViT

@@ -65,6 +65,11 @@
 - 与 FIDNet/CENet: 输入表示增强 vs decoder/backbone/loss 增强。
 - 与 KPRNet: 前端 learned 2D representation vs 后端 KPConv point-wise refinement。
 
+## 参数量与计算耗时
+
+- 参数量: 3D-MiniNet-small 约 1.13M；3D-MiniNet 标准版约 3.97M。
+- 计算耗时: small 版本约 61 FPS，约 16.4 ms/scan；标准版约 36 FPS，约 27.8 ms/scan；KNN 版本精度更高，但后处理是否计入需单独确认。
+
 ## 论文与代码地址
 
 - 论文地址: https://arxiv.org/abs/2002.10893

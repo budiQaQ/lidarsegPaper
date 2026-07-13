@@ -54,6 +54,31 @@
 | 主要优势 | 理论基础 | 层次几何 | 早期实时混合 | 工程基线 | LiDAR 自适应卷积 | 轻量 learned projection | 完整上下文 + uncertainty | 极简 decoder | 高 mIoU/实时折中 | 点级可学习恢复 | 高精度/简洁折中 | 图像先验训练增强，推理不依赖图像 |
 | 主要瓶颈 | 大场景弱 | 采样/邻域慢 | 老 TF 代码 | 精度偏低 | SAC 成本 | 分组复杂 | 网络较复杂 | 表达上限 | 无官方代码 | 速度慢 | 复现细节多 | 训练数据/依赖复杂 |
 
+## 参数量与计算耗时对比
+
+注意：下表只汇总论文/官方 README/已整理材料中可确认的口径。不同论文硬件、输入分辨率、是否包含 projection/post-processing、是否使用 FP16/TTA 都不同，因此只能用于工程筛选，不能当作严格 benchmark。
+
+| 方法 | 参数量 | 计算耗时 / 速度 | 口径备注 |
+| --- | --- | --- | --- |
+| PointNet | 未给出统一 LiDAR segmentation 参数量 | 未报告整帧 LiDAR FPS | 原始任务是分类、part segmentation、室内场景，不是自动驾驶 scan 级 benchmark |
+| PointNet++ | 未给出统一参数量 | 未报告可横比整帧 LiDAR FPS | SSG/MSG/MRG、点数、采样邻域会显著改变耗时 |
+| LU-Net | 未报告；代码可在 TF1 环境打印 trainable variables | 约 24 FPS，约 41.7 ms/scan | 早期 KITTI 三类设置，不能直接横比 SemanticKITTI 20 类 |
+| RangeNet++ | 本地官方 README 未确认 | RangeNet53++ 约 12 scans/sec，约 83 ms/scan | 需确认是否包含 kNN post-processing |
+| SqueezeSegV3 | 未确认；随 SAC/ResNet-21/53 变化 | SqueezeSegV3-53+kNN 约 6 scans/sec，约 167 ms/scan | SAC 增加 MAC 和显存，kNN 开关影响速度 |
+| 3D-MiniNet | small 1.13M；标准版 3.97M | small 61 FPS，标准版 36 FPS | KNN 版本精度更高，但后处理耗时需单独统计 |
+| SalsaNext | 后续对比表约 6.7M | 后续对比表约 19 ms | PandaSet validation 对比口径，非所有论文同硬件 |
+| FIDNet | 约 6M | CNN-only 约 11 ms；NLA 约 1.2 ms；FP16 单帧约 0.01 s | decoder 无参数，后处理 NLA 比 KNN 更轻 |
+| Lite-HDSeg | 未确认 | 约 20 FPS，约 50 ms/scan | 无可信官方代码，本地不估算参数 |
+| KPRNet | 未确认 | 对比表约 0.3 FPS，约 3333 ms/scan | KPConv point-wise refinement 是主要耗时来源 |
+| CENet | 代码可统计，当前未运行 PyTorch | 64x2048 约 37.79 FPS；64x1024 约 67.97 FPS；64x512 约 84.91 FPS | 官方 RTX 3080 speed log，含 CNN 与轻量 KNN/NLA 风格后处理 |
+| 2DPASS | 1.9M 小模型；45.6M 大模型 | SemanticKITTI single-scan 约 62 ms | 推理期只保留 3D LiDAR student，图像分支只在训练期 |
+| RangeViT | 未确认；随 ViT backbone/patch/decoder 变化 | 未找到可横比单帧 latency | 需要本地拆分 stem、ViT、decoder/refiner 统计 |
+| RangeFormer | 约 23.7M | 约 54 ms | RangeRet 论文 PandaSet validation 对比表口径 |
+| RangeRet | 约 3.8M | 约 38 ms | 轻量 Retentive Network，显式 circular prior |
+| Swin Transformer | Swin-T/S/B backbone 约 28M/50M/88M；UPerNet 约 60M/81M/121M | ImageNet 分类 Swin-T/S/B 约 755/437/278 FPS | 通用视觉模型，不能直接代表 camera teacher segmentation latency |
+| Point Transformer V3 | 未确认；随 Pointcept 配置变化 | 论文整理中约 44 ms，显存约 1.2G | 3D point Transformer 口径，不是 range-view student |
+| Stratified Transformer | 未确认 | 未找到可横比 LiDAR scan latency | 室内 point-based benchmark，依赖 pointops2 |
+
 ## 这次新增五篇与过往论文的主要不同
 
 ### RangeNet++ 带来的基线意义

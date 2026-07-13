@@ -12,5 +12,6 @@
 - 主要数据集: SemanticKITTI, KITTI
 - 表示形式: learned 2D representation from 3D points + 2D FCNN
 - 核心模块: projection learning module, local/global 3D features, MiniNet-style 2D FCNN, optional kNN post-processing
+- 参数量与计算耗时: small 约 1.13M/61 FPS；标准版约 3.97M/36 FPS。
 - 代表结果: SemanticKITTI test 3D-MiniNet-KNN 55.8 mIoU；small 版本 51.8 mIoU / 61 FPS / 1.13M params
 - 复现备注: 仓库同时含 PyTorch 与 TensorFlow 代码；PyTorch 版本基于 RangeNet++，TensorFlow 版本基于 LU-Net。

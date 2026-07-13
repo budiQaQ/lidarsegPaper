@@ -12,4 +12,5 @@
 - 方法类型: range-image / spherical projection based 2D CNN
 - 主要数据集: SemanticKITTI
 - 核心模块: 1x1 input module, ResNet-34 backbone, FID fully interpolation decoding, ASPP-like classification head, NLA nearest label assignment post-processing
+- 参数量与计算耗时: 约 6M；CNN-only 约 11 ms，NLA 后处理约 1.2 ms，半精度单帧约 0.01 s。
 - 复现备注: README 提供 Docker/PyTorch 1.7.1 环境、训练/验证/测试脚本和 Google Drive 预训练权重；未下载数据集和权重。

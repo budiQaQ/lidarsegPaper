@@ -8,26 +8,26 @@
 
 ## 已整理论文中的 Range-Image / Projection 方法
 
-| 性能层级 | 论文 | 已整理 | 主要指标/表现 | 方法定位 |
-| --- | --- | --- | --- | --- |
-| 高 | CENet | 是 | SemanticKITTI test 约 64.7 mIoU | FIDNet 思路上的增强版，3x3 conv + activation + auxiliary heads |
-| 高 | RangeRet | 是 | SemanticKITTI test 64.5 mIoU；PandaSet test 60.0；SemanticPOSS test 52.8 | Retentive Network + Circular Retention，轻量 range-view 长程建模 |
-| 高 | RangeViT | 是 | SemanticKITTI test 64.0 mIoU；nuScenes val 75.2 mIoU | range image + image-pretrained ViT + 3D refiner |
-| 高 | Lite-HDSeg | 是 | SemanticKITTI test 63.8 mIoU，约 20 FPS | lite harmonic dense convolution + ICM + MCSPN，高精度实时 encoder-decoder |
-| 高 | KPRNet | 是 | SemanticKITTI test 63.1 mIoU | 2D projection CNN + KPConv learnable point-wise refinement |
-| 中高 | SalsaNext | 是 | SemanticKITTI test 约 59.5 mIoU | 完整 range-image encoder-decoder，dilated context + pixel shuffle + uncertainty |
-| 中高 | FIDNet | 是 | validation 约 58.8/58.9 mIoU；补充结构约 60 mIoU | 极简 parameter-free interpolation decoding + NLA |
-| 中 | SqueezeSegV3 | 是 | SqueezeSegV3-53+kNN 55.9 mIoU | spatially-adaptive convolution，针对 range image 空间非平稳性 |
-| 中 | 3D-MiniNet | 是 | 3D-MiniNet-KNN 55.8 mIoU；small 版 51.8 mIoU/61 FPS | learned 2D representation + 轻量 2D FCNN |
-| 中 | RangeNet++ | 是 | RangeNet53++ 52.2 mIoU，约 12 scans/sec | 经典 spherical projection + Darknet + kNN baseline |
-| 早期不可横比 | LU-Net | 是 | KITTI 三类 average IoU 55.4，24 FPS | learned 3D local feature + U-Net，非 SemanticKITTI 20 类 |
+| 性能层级 | 论文 | 已整理 | 主要指标/表现 | 参数量 | 计算耗时/速度 | 方法定位 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 高 | CENet | 是 | SemanticKITTI test 约 64.7 mIoU | 代码可统计，当前未运行 PyTorch | 64x2048 约 37.79 FPS；64x1024 约 67.97 FPS；64x512 约 84.91 FPS | FIDNet 思路上的增强版，3x3 conv + activation + auxiliary heads |
+| 高 | RangeRet | 是 | SemanticKITTI test 64.5 mIoU；PandaSet test 60.0；SemanticPOSS test 52.8 | 约 3.8M | PandaSet validation 约 38 ms | Retentive Network + Circular Retention，轻量 range-view 长程建模 |
+| 高 | RangeViT | 是 | SemanticKITTI test 64.0 mIoU；nuScenes val 75.2 mIoU | 未确认，取决于 ViT backbone | 未找到可横比 latency | range image + image-pretrained ViT + 3D refiner |
+| 高 | Lite-HDSeg | 是 | SemanticKITTI test 63.8 mIoU，约 20 FPS | 未确认 | 约 20 FPS，约 50 ms/scan | lite harmonic dense convolution + ICM + MCSPN，高精度实时 encoder-decoder |
+| 高 | KPRNet | 是 | SemanticKITTI test 63.1 mIoU | 未确认 | 对比表约 0.3 FPS，约 3333 ms/scan | 2D projection CNN + KPConv learnable point-wise refinement |
+| 中高 | SalsaNext | 是 | SemanticKITTI test 约 59.5 mIoU | 后续对比表约 6.7M | 后续对比表约 19 ms | 完整 range-image encoder-decoder，dilated context + pixel shuffle + uncertainty |
+| 中高 | FIDNet | 是 | validation 约 58.8/58.9 mIoU；补充结构约 60 mIoU | 约 6M | CNN-only 约 11 ms；NLA 约 1.2 ms；FP16 单帧约 0.01 s | 极简 parameter-free interpolation decoding + NLA |
+| 中 | SqueezeSegV3 | 是 | SqueezeSegV3-53+kNN 55.9 mIoU | 未确认 | 约 6 scans/sec，约 167 ms/scan | spatially-adaptive convolution，针对 range image 空间非平稳性 |
+| 中 | 3D-MiniNet | 是 | 3D-MiniNet-KNN 55.8 mIoU；small 版 51.8 mIoU | small 1.13M；标准版 3.97M | small 61 FPS；标准版 36 FPS | learned 2D representation + 轻量 2D FCNN |
+| 中 | RangeNet++ | 是 | RangeNet53++ 52.2 mIoU，约 12 scans/sec | 未确认 | 约 12 scans/sec，约 83 ms/scan | 经典 spherical projection + Darknet + kNN baseline |
+| 早期不可横比 | LU-Net | 是 | KITTI 三类 average IoU 55.4，24 FPS | 未报告，代码可统计 | 约 24 FPS，约 41.7 ms/scan | learned 3D local feature + U-Net，非 SemanticKITTI 20 类 |
 
 ## Range-View Transformer 强基线
 
-| 论文 | 已整理 | 主要指标/表现 | 方法定位 |
-| --- | --- | --- | --- |
-| RangeFormer | 是 | SemanticKITTI test 73.3 mIoU；STR 低分辨率训练 72.2 mIoU | 当前最重要的 LiDAR-only range-view Transformer/full-cycle framework 参考 |
-| RangeRet | 是 | SemanticKITTI test 64.5 mIoU；约 3.8M 参数；PandaSet validation 38 ms | 比 RangeFormer 更轻，适合部署友好的 range-view Transformer/RetNet student |
+| 论文 | 已整理 | 主要指标/表现 | 参数量 | 计算耗时/速度 | 方法定位 |
+| --- | --- | --- | --- | --- | --- |
+| RangeFormer | 是 | SemanticKITTI test 73.3 mIoU；STR 低分辨率训练 72.2 mIoU | 约 23.7M | PandaSet validation 约 54 ms | 当前最重要的 LiDAR-only range-view Transformer/full-cycle framework 参考 |
+| RangeRet | 是 | SemanticKITTI test 64.5 mIoU；PandaSet test 60.0；SemanticPOSS test 52.8 | 约 3.8M | PandaSet validation 约 38 ms | 比 RangeFormer 更轻，适合部署友好的 range-view Transformer/RetNet student |
 
 ## 仍建议后续补齐的谱系论文
 
@@ -40,10 +40,10 @@
 
 ## 非 Range-Image 但必须作为性能参照的方法
 
-| 论文 | 已整理 | 主要指标/表现 | 为什么单独列出 |
-| --- | --- | --- | --- |
-| 2DPASS | 是 | SemanticKITTI single-scan test 72.9 mIoU；训练期用图像，推理期只用 LiDAR | 它不是 range-image 方法，而是 sparse point-voxel 3D backbone + 2D priors KD；性能显著高于已整理 range-image 组，适合作精度上限参照 |
-| Point Transformer V3 | 是 | nuScenes val 80.3 mIoU；Waymo semantic 71.2；论文图中 SemanticKITTI 63.5 | 不是 range-image，适合作 3D Transformer teacher/upper-bound 对照 |
+| 论文 | 已整理 | 主要指标/表现 | 参数量 | 计算耗时/速度 | 为什么单独列出 |
+| --- | --- | --- | --- | --- | --- |
+| 2DPASS | 是 | SemanticKITTI single-scan test 72.9 mIoU；训练期用图像，推理期只用 LiDAR | 1.9M 小模型；45.6M 大模型 | 论文表约 62 ms | 它不是 range-image 方法，而是 sparse point-voxel 3D backbone + 2D priors KD；性能显著高于已整理 range-image 组，适合作精度上限参照 |
+| Point Transformer V3 | 是 | nuScenes val 80.3 mIoU；Waymo semantic 71.2；论文图中 SemanticKITTI 63.5 | 未确认 | 整理中记录约 44 ms | 不是 range-image，适合作 3D Transformer teacher/upper-bound 对照 |
 
 ## 性能排序带来的工程判断
 
