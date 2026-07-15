@@ -10,6 +10,7 @@
 
 | 性能层级 | 论文 | 已整理 | 主要指标/表现 | 参数量 | 计算耗时/速度 | 方法定位 |
 | --- | --- | --- | --- | --- | --- | --- |
+| 高 / pipeline 增强 | FLARES | 是 | SemanticKITTI 对 SalsaNext/FIDNet/CENet/RangeViT 分别提升约 5.3/7.9/3.3/2.1 mIoU；nuScenes 提升约 2.3/3.9/3.1/1.8 mIoU | 取决于 backbone；FLARES-FIDNet 约 6.0M，FLARES-CENet 约 6.8M，FLARES-RangeViT 约 24.1M | FLARES-FIDNet 约 19 ms，FLARES-CENet 约 22 ms，FLARES-SalsaNext/RangeViT 约 29 ms；论文称超过 40% speed-up | multi-range training/inference paradigm，增强既有 range-view backbone |
 | 高 | CENet | 是 | SemanticKITTI test 约 64.7 mIoU | 代码可统计，当前未运行 PyTorch | 64x2048 约 37.79 FPS；64x1024 约 67.97 FPS；64x512 约 84.91 FPS | FIDNet 思路上的增强版，3x3 conv + activation + auxiliary heads |
 | 高 | RangeRet | 是 | SemanticKITTI test 64.5 mIoU；PandaSet test 60.0；SemanticPOSS test 52.8 | 约 3.8M | PandaSet validation 约 38 ms | Retentive Network + Circular Retention，轻量 range-view 长程建模 |
 | 高 | RangeViT | 是 | SemanticKITTI test 64.0 mIoU；nuScenes val 75.2 mIoU | 未确认，取决于 ViT backbone | 未找到可横比 latency | range image + image-pretrained ViT + 3D refiner |
@@ -27,6 +28,7 @@
 | 论文 | 已整理 | 主要指标/表现 | 参数量 | 计算耗时/速度 | 方法定位 |
 | --- | --- | --- | --- | --- | --- |
 | RangeFormer | 是 | SemanticKITTI test 73.3 mIoU；STR 低分辨率训练 72.2 mIoU | 约 23.7M | PandaSet validation 约 54 ms | 当前最重要的 LiDAR-only range-view Transformer/full-cycle framework 参考 |
+| FLARES | 是 | 对 RangeViT 也能提升，SemanticKITTI 约 +2.1 mIoU，nuScenes 约 +1.8 mIoU | 取决于接入的 RangeViT 配置，论文表约 24.1M | 约 29 ms | 与 RangeFormer/STR 同属 range-view pipeline 级优化，但更强调 multi-range low-resolution projection + NNRI |
 | RangeRet | 是 | SemanticKITTI test 64.5 mIoU；PandaSet test 60.0；SemanticPOSS test 52.8 | 约 3.8M | PandaSet validation 约 38 ms | 比 RangeFormer 更轻，适合部署友好的 range-view Transformer/RetNet student |
 
 ## 仍建议后续补齐的谱系论文
@@ -48,8 +50,9 @@
 ## 性能排序带来的工程判断
 
 - 追求最高 mIoU: CENet、Lite-HDSeg、KPRNet 是当前已整理 range/projection 组的前三。
-- 追求轻量实时 baseline: FIDNet、CENet、RangeNet++ 更适合直接改造；3D-MiniNet 也适合做小模型对照。
+- 追求轻量实时 baseline: FIDNet、CENet、RangeNet++ 更适合直接改造；3D-MiniNet 也适合做小模型对照；FLARES 适合作为这些 baseline 的 pipeline 增强层。
 - 追求边界/点级恢复: KPRNet 的 KPConv refinement、Lite-HDSeg 的 MCSPN、RangeNet++/SqueezeSegV3/3D-MiniNet 的 kNN、FIDNet 的 NLA 是四条不同路线。
+- 追求低分辨率 range-view 仍保持精度: FLARES 的 multi-range splitting、MCF 和 NNRI 是当前最直接参考。
 - 追求卷积算子创新: SqueezeSegV3 的 SAC 和 Lite-HDSeg 的 harmonic dense convolution 最值得单独拆解。
 - 追求谱系完整: RangeNet++ 是后续 SqueezeSegV3、3D-MiniNet、SalsaNext 等代码/流程的重要基线。
 - 追求更高精度上限且允许训练期引入相机图像: 2DPASS 是比 range-image 组更强的参照，但不能作为纯 range-image 结构公平横比。
