@@ -15,3 +15,8 @@
 **/*.ckpt
 **/*.tar.gz
 **/*.zip
+
+# Local Python and validation artifacts.
+__pycache__/
+*.py[cod]
+/tmp/

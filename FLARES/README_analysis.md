@@ -113,3 +113,7 @@ else:
 ## 使用方法描述
 
 使用时不需要重写 backbone，而是在数据 pipeline 中先实现 spherical-coordinate splitting 和低分辨率 multi-range projection；训练阶段加入 WPD+ / MCF，推理阶段对所有 sub-cloud 并行 forward，并用 NNRI 回投影。更适合先接到 FIDNet 或 CENet 上做 ablation，因为这两者 decoder 简洁，改动边界清楚。
+
+## 96 x 480 x 3 多回波输入延伸设计
+
+对于每个 range-view 像素已经显式保存最多三个点、最终只输出单层点云的任务，不宜机械复制 FLARES sub-cloud。已将候选二分类+最近点、`K+1` 联合选择、联合选择+候选二分类辅助监督三种方法及完整模型代码整理在 [multi_return_single_layer 设计文档](../designs/multi_return_single_layer/README.md)。
